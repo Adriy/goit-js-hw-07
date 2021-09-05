@@ -13,12 +13,19 @@ const images = [
   },
 ];
 
+const imageEl = document.getElementById('gallery');
 
-const imageEl = document.querySelector('#gallery');
+const reateNewGallery = el => {
+  return el
+    .map(({ url, alt }) => {
+      return `
+    <li>
+    <img src="${url}" alt="${alt}" width = "300px" height = "200px">
+    </li>`;
+    })
+    .join(``);
+};
+imageEl.insertAdjacentHTML(`afterbegin`, reateNewGallery(images));
 
-images.forEach(el => {
-  imageEl.insertAdjacentHTML(
-    'afterbegin',
-    `<li><img src = "${el.url}" alt = "${el.alt}"  width = "300"/></li>`,
-  );
-});
+imageEl.style.listStyle = `none`;
+imageEl.style.display = 'flex';
